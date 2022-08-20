@@ -5,101 +5,109 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="css/style.css">
-    <title>Wordle</title>
+    <title>Verble</title>
 </head>
 
 <body>
     <div class="container">
         <nav class="navbar">
 
-            <h1>Wordle</h1>
+            <h1>Verble</h1>
 
         </nav>
 
         <div class="tabuleiro">
             <div id="tabl1" class="linha-tab">
-                <div id='quad1' class="quad"></div>
-                <div id='quad2' class="quad"></div>
-                <div id='quad3' class="quad"></div>
-                <div id='quad4' class="quad"></div>
-                <div id='quad5' class="quad"></div>
+                <div id='quad1 ' class="quad item"></div>
+                <div id='quad2' class="quad item"></div>
+                <div id='quad3' class="quad item"></div>
+                <div id='quad4' class="quad item"></div>
+                <div id='quad5' class="quad item"></div>
             </div>
             <div id="tabl2" class="linha-tab">
-                <div id='quad6' class="quad"></div>
-                <div id='quad7' class="quad"></div>
-                <div id='quad8' class="quad"></div>
-                <div id='quad9' class="quad"></div>
-                <div id='quad10' class="quad"></div>
+                <div id='quad6' class="quad item"></div>
+                <div id='quad7' class="quad item"></div>
+                <div id='quad8' class="quad item"></div>
+                <div id='quad9' class="quad item"></div>
+                <div id='quad10' class="quad item"></div>
             </div>
             <div id="tabl3" class="linha-tab">
-                <div id='quad11' class="quad"></div>
-                <div id='quad12' class="quad"></div>
-                <div id='quad13' class="quad"></div>
-                <div id='quad14' class="quad"></div>
-                <div id='quad15' class="quad"></div>
+                <div id='quad11' class="quad item"></div>
+                <div id='quad12' class="quad item"></div>
+                <div id='quad13' class="quad item"></div>
+                <div id='quad14' class="quad item"></div>
+                <div id='quad15' class="quad item"></div>
             </div>
             <div id="tabl4" class="linha-tab">
-                <div id='quad16' class="quad"></div>
-                <div id='quad17' class="quad"></div>
-                <div id='quad18' class="quad"></div>
-                <div id='quad19' class="quad"></div>
-                <div id='quad20' class="quad"></div>
+                <div id='quad16' class="quad item"></div>
+                <div id='quad17' class="quad item"></div>
+                <div id='quad18' class="quad item"></div>
+                <div id='quad19' class="quad item"></div>
+                <div id='quad20' class="quad item"></div>
             </div>
             <div id="tabl5" class="linha-tab">
-                <div id='quad21' class="quad"></div>
-                <div id='quad22' class="quad"></div>
-                <div id='quad23' class="quad"></div>
-                <div id='quad24' class="quad"></div>
-                <div id='quad25' class="quad"></div>
+                <div id='quad21' class="quad item"></div>
+                <div id='quad22' class="quad item"></div>
+                <div id='quad23' class="quad item"></div>
+                <div id='quad24' class="quad item"></div>
+                <div id='quad25' class="quad item"></div>
             </div>
             <div id="tabl6" class="linha-tab">
-                <div id='quad26' class="quad"></div>
-                <div id='quad27' class="quad"></div>
-                <div id='quad28' class="quad"></div>
-                <div id='quad29' class="quad"></div>
-                <div id='quad30' class="quad"></div>
+                <div id='quad26' class="quad item "></div>
+                <div id='quad27' class="quad item"></div>
+                <div id='quad28' class="quad item"></div>
+                <div id='quad29' class="quad item"></div>
+                <div id='quad30' class="quad item"></div>
             </div>
         </div>
 
         <div class="teclado">
             <div class="linha-tecla">
-                <button id="btn1" class="tecla">Q</button>
-                <button id="btn2" class="tecla">W</button>
-                <button id="btn3" class="tecla">E</button>
-                <button id="btn4" class="tecla">R</button>
-                <button id="btn5" class="tecla">T</button>
-                <button id="btn6" class="tecla">Y</button>
-                <button id="btn7" class="tecla">U</button>
-                <button id="btn9" class="tecla">I</button>
-                <button id="btn10" class="tecla">O</button>
-                <button id="btn11" class="tecla">P</button>
+                <button id="btn1" class="tecla background-tecla">Q</button>
+                <button id="btn2" class="tecla background-tecla">W</button>
+                <button id="btn3" class="tecla background-tecla">E</button>
+                <button id="btn4" class="tecla background-tecla">R</button>
+                <button id="btn5" class="tecla background-tecla">T</button>
+                <button id="btn6" class="tecla background-tecla">Y</button>
+                <button id="btn7" class="tecla background-tecla">U</button>
+                <button id="btn9" class="tecla background-tecla">I</button>
+                <button id="btn10" class="tecla background-tecla">O</button>
+                <button id="btn11" class="tecla background-tecla">P</button>
             </div>
             <div class="linha-tecla">
-                <button id="btn12" class="tecla">A</button>
-                <button id="btn13" class="tecla">S</button>
-                <button id="btn14" class="tecla">D</button>
-                <button id="btn15" class="tecla">F</button>
-                <button id="btn16" class="tecla">G</button>
-                <button id="btn17" class="tecla">H</button>
-                <button id="btn18" class="tecla">J</button>
-                <button id="btn19" class="tecla">K</button>
-                <button id="btn20" class="tecla">L</button>
+                <button id="btn12" class="tecla background-tecla">A</button>
+                <button id="btn13" class="tecla background-tecla">S</button>
+                <button id="btn14" class="tecla background-tecla">D</button>
+                <button id="btn15" class="tecla background-tecla">F</button>
+                <button id="btn16" class="tecla background-tecla">G</button>
+                <button id="btn17" class="tecla background-tecla">H</button>
+                <button id="btn18" class="tecla background-tecla">J</button>
+                <button id="btn19" class="tecla background-tecla">K</button>
+                <button id="btn20" class="tecla background-tecla">L</button>
             </div>
             <div class="linha-tecla">
-                <button id="btn21" class="tecla">ENTER</button>
-                <button id="btn22" class="tecla">Z</button>
-                <button id="btn23" class="tecla">X</button>
-                <button id="btn24" class="tecla">C</button>
-                <button id="btn25" class="tecla">V</button>
-                <button id="btn26" class="tecla">B</button>
-                <button id="btn27" class="tecla">N</button>
-                <button id="btn29" class="tecla">M</button>
-                <button id="btn30" class="tecla">DEL</button>
+                <button id="btn21" class="tecla background-tecla">ENTER</button>
+                <button id="btn22" class="tecla background-tecla">Z</button>
+                <button id="btn23" class="tecla background-tecla">X</button>
+                <button id="btn24" class="tecla background-tecla">C</button>
+                <button id="btn25" class="tecla background-tecla">V</button>
+                <button id="btn26" class="tecla background-tecla">B</button>
+                <button id="btn27" class="tecla background-tecla">N</button>
+                <button id="btn29" class="tecla background-tecla">M</button>
+                <button id="btn30" class="tecla background-tecla">DEL</button>
             </div>
         </div>
     </div>
+
+    <script src="js/teste.js"></script>
     <script src="js/main.js"></script>
+
 
 </body>
 

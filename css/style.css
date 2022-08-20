@@ -1,9 +1,14 @@
 * {
+  background-color: black;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Silkscreen", cursive;
+  font-weight: bold;
 }
-
+i {
+  color: black;
+}
 .container {
   height: 100vh;
   display: flex;
@@ -13,16 +18,20 @@
   justify-content: space-between;
   padding-bottom: 12px;
 }
-
+h1 {
+  font-size: 36px;
+  letter-spacing: 4px;
+  color: white;
+  font-family: "Silkscreen", cursive;
+}
 .navbar {
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  /* ll */
+  border-bottom: 1px solid #343a40;
   height: 77px;
-  border: 2px solid gray;
   padding: 14px;
   align-self: flex-end;
 }
@@ -39,7 +48,6 @@
   max-width: 350px;
   gap: 7px;
   padding: 10px;
-  /* ll */
   width: 90%;
 }
 
@@ -47,7 +55,6 @@
   display: flex;
   width: 100%;
   column-gap: 7px;
-  /* ll */
 }
 
 .linha-tab .quad {
@@ -57,9 +64,7 @@
   justify-content: center;
   align-items: center;
   max-width: 62px;
-
-  /* ll */
-  border: 1px solid gray;
+  color: white;
 }
 
 .teclado {
@@ -76,28 +81,78 @@
   display: flex;
   justify-content: center;
   gap: 4px;
-
-  /* ll */
 }
 
 .linha-tecla .tecla {
+  font-size: 16px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 14px;
   min-width: 45px;
-  border-color: transparent;
-  border-radius: 4px;
-  background-color: #c7c7c7;
+  border-radius: 10%;
+  border-color: #495057;
+}
+.background-tecla {
+  background-color: #6c757d;
+}
+
+.tecla:hover {
+  background-color: gray;
+  border-color: gray;
 }
 
 .correct {
-  background-color: green;
+  color: white;
+  background-color: #50b560;
+  border-color: #50b560;
+  animation: rotate-horizontal-center 1.6s;
 }
 .parcial-correct {
-  background-color: yellow;
+  background-color: #c4bc4f;
+  color: white;
+  border-color: #c4bc4f;
+  animation: rotate-horizontal-center 1.6s;
 }
 .wrong {
-  background-color: gray;
+  color: white;
+  animation: rotate-horizontal-center 1.6s;
+  background-color: #777b7d;
+  border-color: #777b7d;
+}
+.item {
+  border: 2px solid #343a40;
+}
+
+.selected-item {
+  border: 2px solid white;
+}
+
+.invalid-word {
+  animation: go-back 1s;
+}
+
+@keyframes rotate-horizontal-center {
+  0% {
+    transform: rotateX(0);
+  }
+  100% {
+    transform: rotateX(-360deg);
+  }
+}
+
+@keyframes go-back {
+  0% {
+    transform: translateX(15px);
+    border-color: red;
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(0px);
+  }
+  100% {
+    border-color: #e78f8e;
+    opacity: 1;
+  }
 }
