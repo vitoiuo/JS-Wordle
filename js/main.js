@@ -26,27 +26,28 @@ virtualKeys.forEach((el) =>
 );
 
 const inputKey = (keyName) => {
+  tab = document.querySelector(".tabuleiro");
+  saveValues("tab-state", tab.outerHTML);
+
+  try {
+    elLine = Array.from(document.querySelector(`#tabl${i}`).children);
+  } catch {
+    return;
+  }
   if (word.length === 5 && keyName === "ENTER") {
     if (!Object.values(wordsBase).includes(word)) {
       elLine.forEach((e) => e.classList.add("invalid-word"));
     } else {
       elLine.forEach((e) => e.classList.remove("invalid-word"));
       letterChecker(elLine);
-
       if (word === dayWord) {
         return;
       }
-      word = "";
       i++;
+      word = "";
     }
   }
-  try {
-    elLine = Array.from(document.querySelector(`#tabl${i}`).children);
-  } catch {
-    return;
-  }
-  tab = document.querySelector(".tabuleiro");
-  saveValues("tab-state", tab.outerHTML);
+
   saveValues("tries", i);
   for (let i = 4; i >= 0; i--) {
     if (
@@ -60,6 +61,7 @@ const inputKey = (keyName) => {
       break;
     }
   }
+
   buildUserWord(elLine, keyName);
 };
 
@@ -86,21 +88,26 @@ const letterChecker = (line) => {
   let time = 0;
   line.forEach((e) => {
     const quadText = e.textContent;
-    setTimeout(() => {
-      e.classList.remove("selected-item");
-      if (!dayWord.includes(quadText)) {
-        e.classList.add("wrong");
-      } else if (
-        line.indexOf(e) !== dayWord.indexOf(quadText) &&
-        line.indexOf(e) !== dayWord.lastIndexOf(quadText)
-      ) {
-        e.classList.add("parcial-correct");
-      } else {
-        e.classList.add("correct");
-      }
-      keyboardColor(e);
-    }, time);
-    time += 700;
+    if (quadText !== "") {
+      setTimeout(() => {
+        e.classList.remove("selected-item");
+        if (!dayWord.includes(quadText)) {
+          e.classList.add("wrong");
+          e.classList.add("animate");
+        } else if (
+          line.indexOf(e) !== dayWord.indexOf(quadText) &&
+          line.indexOf(e) !== dayWord.lastIndexOf(quadText)
+        ) {
+          e.classList.add("parcial-correct");
+          e.classList.add("animate");
+        } else {
+          e.classList.add("correct");
+          e.classList.add("animate");
+        }
+        keyboardColor(e);
+      }, time);
+      time += 700;
+    }
   });
 };
 
@@ -109,13 +116,14 @@ const keyboardColor = (e) => {
     if (key.textContent === e.textContent) {
       key.classList.remove("background-tecla");
       if (e.classList.contains("correct")) {
+        key.classList.remove("parcial-correct");
         key.classList.add("correct");
         return;
       } else if (e.classList.contains("parcial-correct")) {
         key.classList.add("parcial-correct");
         return;
       } else if (
-        !key.classList.contains("correct") &&
+        !key.classList.contains("correct-keyboard") &&
         !key.classList.contains("parcial-correct")
       ) {
         key.classList.add("wrong");
@@ -133,25 +141,18 @@ const repeatedTerms = (word, term) => {
 };
 
 const setValues = () => {
-  const properties = Object.keys(localStorage);
-  properties.forEach((propertie) => {
-    if (propertie === "tries") {
-      i = localStorage[propertie];
-    }
-    if (propertie === "tab-state") {
-      tab.outerHTML = localStorage[propertie];
-    }
-  });
   const lines = document.querySelectorAll(".linha-tab");
-  let j = 1;
+  let j = 0;
   if (localStorage["tries"]) {
+    i = localStorage.getItem("tries");
+    tab.outerHTML = localStorage.getItem("tab-state");
     lines.forEach((e) => {
-      if (j == localStorage["tries"]) {
-        return;
-      }
+      j++;
       let line = Array.from(document.querySelector(`#tabl${j}`).children);
       letterChecker(line);
-      j++;
+      if (j == i) {
+        return;
+      }
     });
   }
 };

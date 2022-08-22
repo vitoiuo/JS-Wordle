@@ -107,17 +107,15 @@ h1 {
   color: white;
   background-color: #50b560;
   border-color: #50b560;
-  animation: rotate-horizontal-center 1.6s;
 }
 .parcial-correct {
   background-color: #c4bc4f;
   color: white;
   border-color: #c4bc4f;
-  animation: rotate-horizontal-center 1.6s;
 }
 .wrong {
   color: white;
-  animation: rotate-horizontal-center 1.6s;
+
   background-color: #777b7d;
   border-color: #777b7d;
 }
@@ -131,6 +129,10 @@ h1 {
 
 .invalid-word {
   animation: go-back 1s;
+}
+
+.animate {
+  animation: rotate-horizontal-center 1.6s;
 }
 
 @keyframes rotate-horizontal-center {
