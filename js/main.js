@@ -31,7 +31,7 @@ const inputKey = (keyName) => {
       elLine.forEach((e) => e.classList.add("invalid-word"));
     } else {
       elLine.forEach((e) => e.classList.remove("invalid-word"));
-      letterChecker(word, elLine);
+      letterChecker(elLine);
 
       if (word === dayWord) {
         return;
@@ -82,22 +82,20 @@ const removeKey = (e) => {
   e.textContent = "";
 };
 
-const letterChecker = (word, line) => {
+const letterChecker = (line) => {
   let time = 0;
   line.forEach((e) => {
     const quadText = e.textContent;
     setTimeout(() => {
+      e.classList.remove("selected-item");
       if (!dayWord.includes(quadText)) {
-        e.classList.remove("selected-item");
         e.classList.add("wrong");
       } else if (
         line.indexOf(e) !== dayWord.indexOf(quadText) &&
         line.indexOf(e) !== dayWord.lastIndexOf(quadText)
       ) {
-        e.classList.remove("selected-item");
         e.classList.add("parcial-correct");
       } else {
-        e.classList.remove("selected-item");
         e.classList.add("correct");
       }
       keyboardColor(e);
@@ -144,6 +142,18 @@ const setValues = () => {
       tab.outerHTML = localStorage[propertie];
     }
   });
+  const lines = document.querySelectorAll(".linha-tab");
+  let j = 1;
+  if (localStorage["tries"]) {
+    lines.forEach((e) => {
+      if (j == localStorage["tries"]) {
+        return;
+      }
+      let line = Array.from(document.querySelector(`#tabl${j}`).children);
+      letterChecker(line);
+      j++;
+    });
+  }
 };
 
 setValues();
