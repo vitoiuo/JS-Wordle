@@ -132,14 +132,6 @@ const keyboardColor = (e) => {
   });
 };
 
-const repeatedTerms = (word, term) => {
-  let result = [...word].reduce((counter, a) => {
-    a == term && counter++;
-    return counter;
-  }, 0);
-  return result;
-};
-
 const setValues = () => {
   const lines = document.querySelectorAll(".linha-tab");
   let j = 0;
@@ -148,8 +140,12 @@ const setValues = () => {
     tab.outerHTML = localStorage.getItem("tab-state");
     lines.forEach((e) => {
       j++;
+      let setWord = "";
       let line = Array.from(document.querySelector(`#tabl${j}`).children);
-      letterChecker(line);
+      line.forEach((e) => (setWord += e.textContent));
+      if (Object.values(wordsBase).includes(setWord)) {
+        letterChecker(line);
+      }
       if (j == i) {
         return;
       }
