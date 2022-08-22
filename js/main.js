@@ -26,19 +26,13 @@ virtualKeys.forEach((el) =>
 );
 
 const inputKey = (keyName) => {
-  tab = document.querySelector(".tabuleiro");
-  saveValues("tab-state", tab.outerHTML);
-
-  try {
-    elLine = Array.from(document.querySelector(`#tabl${i}`).children);
-  } catch {
-    return;
-  }
+  changeLine(i);
   if (word.length === 5 && keyName === "ENTER") {
+    saveValues("tab-state", tab.outerHTML);
     if (!Object.values(wordsBase).includes(word)) {
       elLine.forEach((e) => e.classList.add("invalid-word"));
     } else {
-      elLine.forEach((e) => e.classList.remove("invalid-word"));
+      tab = document.querySelector(".tabuleiro");
       letterChecker(elLine);
       if (word === dayWord) {
         return;
@@ -47,7 +41,6 @@ const inputKey = (keyName) => {
       word = "";
     }
   }
-
   saveValues("tries", i);
   for (let i = 4; i >= 0; i--) {
     if (
@@ -57,6 +50,7 @@ const inputKey = (keyName) => {
     ) {
       removeKey(elLine[i]);
       elLine[i].classList.remove("selected-item");
+      elLine[i].classList.remove("invalid-word");
       elLine[i].classList.add("item");
       break;
     }
@@ -65,6 +59,13 @@ const inputKey = (keyName) => {
   buildUserWord(elLine, keyName);
 };
 
+const changeLine = (i) => {
+  try {
+    elLine = Array.from(document.querySelector(`#tabl${i}`).children);
+  } catch {
+    return;
+  }
+};
 const buildUserWord = (line, key) => {
   for (let el of line) {
     if (!el.textContent && alphabet.includes(key)) {
@@ -119,11 +120,14 @@ const keyboardColor = (e) => {
         key.classList.remove("parcial-correct");
         key.classList.add("correct");
         return;
-      } else if (e.classList.contains("parcial-correct")) {
+      } else if (
+        e.classList.contains("parcial-correct") &&
+        !key.classList.contains("correct")
+      ) {
         key.classList.add("parcial-correct");
         return;
       } else if (
-        !key.classList.contains("correct-keyboard") &&
+        !key.classList.contains("correct") &&
         !key.classList.contains("parcial-correct")
       ) {
         key.classList.add("wrong");
@@ -145,6 +149,8 @@ const setValues = () => {
       line.forEach((e) => (setWord += e.textContent));
       if (Object.values(wordsBase).includes(setWord)) {
         letterChecker(line);
+      } else {
+        line.forEach((e) => e.classList.remove("invalid-word"));
       }
       if (j == i) {
         return;
