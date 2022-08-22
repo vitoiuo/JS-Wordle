@@ -1,4 +1,4 @@
-const today = new Date().toLocaleDateString();
+const today = new Date("2022-09-23").toLocaleDateString();
 const wordsBase = generateWordsBase();
 const dayWord = wordsBase[today];
 const virtualKeys = document.querySelectorAll(".tecla");
@@ -28,11 +28,11 @@ virtualKeys.forEach((el) =>
 const inputKey = (keyName) => {
   changeLine(i);
   if (word.length === 5 && keyName === "ENTER") {
-    saveValues("tab-state", tab.outerHTML);
     if (!Object.values(wordsBase).includes(word)) {
       elLine.forEach((e) => e.classList.add("invalid-word"));
     } else {
       tab = document.querySelector(".tabuleiro");
+      saveValues("tab-state", tab.outerHTML);
       letterChecker(elLine);
       if (word === dayWord) {
         return;
