@@ -3,12 +3,16 @@ const wordsBase = generateWordsBase();
 const dayWord = wordsBase[today];
 const virtualKeys = document.querySelectorAll(".tecla");
 let elLine;
+let tab = document.querySelector(".tabuleiro");
 console.log(dayWord);
 const alpha = [...Array(26)].map((e, i) => i + 65);
 const alphabet = alpha.map((x) => String.fromCharCode(x));
 let word = "";
-
 let i = 1;
+
+const saveValues = (nome, value) => {
+  localStorage[nome] = value;
+};
 
 document.addEventListener("keydown", (e) => {
   const keyName = e.key.toUpperCase();
@@ -22,13 +26,13 @@ virtualKeys.forEach((el) =>
 );
 
 const inputKey = (keyName) => {
-  setValues("tries", i);
   if (word.length === 5 && keyName === "ENTER") {
     if (!Object.values(wordsBase).includes(word)) {
       elLine.forEach((e) => e.classList.add("invalid-word"));
     } else {
       elLine.forEach((e) => e.classList.remove("invalid-word"));
       letterChecker(word, elLine);
+
       if (word === dayWord) {
         return;
       }
@@ -39,8 +43,10 @@ const inputKey = (keyName) => {
   try {
     elLine = Array.from(document.querySelector(`#tabl${i}`).children);
   } catch {
-    window.alert("Rufem os tambores (TUM TUM TUM)");
+    return;
   }
+  tab = document.querySelector(".tabuleiro");
+  saveValues("tab-state", tab.outerHTML);
   saveValues("tries", i);
   for (let i = 4; i >= 0; i--) {
     if (
@@ -67,7 +73,6 @@ const buildUserWord = (line, key) => {
       break;
     }
   }
-  // setValues(`word${i}`, word);
 };
 
 const removeKey = (e) => {
@@ -129,16 +134,16 @@ const repeatedTerms = (word, term) => {
   return result;
 };
 
-const saveValues = (nome, value) => {
-  localStorage[nome] = value;
-};
-
 const setValues = () => {
   const properties = Object.keys(localStorage);
   properties.forEach((propertie) => {
-    console.log(propertie);
     if (propertie === "tries") {
       i = localStorage[propertie];
     }
+    if (propertie === "tab-state") {
+      tab.outerHTML = localStorage[propertie];
+    }
   });
 };
+
+setValues();
