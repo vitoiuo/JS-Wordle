@@ -1,4 +1,4 @@
-const today = new Date("2022-09-23").toLocaleDateString();
+const today = new Date().toLocaleDateString();
 const wordsBase = generateWordsBase();
 const dayWord = wordsBase[today];
 const virtualKeys = document.querySelectorAll(".tecla");
@@ -34,8 +34,9 @@ const inputKey = (keyName) => {
       tab = document.querySelector(".tabuleiro");
       saveValues("tab-state", tab.outerHTML);
       letterChecker(elLine);
+      console.log(word);
       if (word === dayWord) {
-        return;
+        document.removeEventListener("keydown", () => {});
       }
       i++;
       word = "";
@@ -43,11 +44,7 @@ const inputKey = (keyName) => {
   }
   saveValues("tries", i);
   for (let i = 4; i >= 0; i--) {
-    if (
-      ["BACKSPACE", "DEL"].includes(keyName) &&
-      elLine[i].textContent != "" &&
-      word !== dayWord
-    ) {
+    if (["BACKSPACE", "DEL"].includes(keyName) && elLine[i].textContent != "") {
       removeKey(elLine[i]);
       elLine[i].classList.remove("selected-item");
       elLine[i].classList.remove("invalid-word");
@@ -145,6 +142,7 @@ const setValues = () => {
     lines.forEach((e) => {
       j++;
       let setWord = "";
+
       let line = Array.from(document.querySelector(`#tabl${j}`).children);
       line.forEach((e) => (setWord += e.textContent));
       if (Object.values(wordsBase).includes(setWord)) {
@@ -152,7 +150,7 @@ const setValues = () => {
       } else {
         line.forEach((e) => e.classList.remove("invalid-word"));
       }
-      if (j == i) {
+      if (j === i) {
         return;
       }
     });
