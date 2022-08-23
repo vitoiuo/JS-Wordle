@@ -133,7 +133,7 @@ h1 {
 }
 
 .animate {
-  animation: rotate-horizontal-center 1.6s;
+  animation: rotate-horizontal-center 1s;
 }
 
 @keyframes rotate-horizontal-center {

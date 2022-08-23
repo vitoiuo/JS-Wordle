@@ -9,6 +9,7 @@ const alpha = [...Array(26)].map((e, i) => i + 65);
 const alphabet = alpha.map((x) => String.fromCharCode(x));
 let word = "";
 let i = 1;
+let gameOver;
 
 const saveValues = (nome, value) => {
   localStorage[nome] = value;
@@ -16,17 +17,22 @@ const saveValues = (nome, value) => {
 
 document.addEventListener("keydown", (e) => {
   const keyName = e.key.toUpperCase();
+  if (gameOver) {
+    return;
+  }
   inputKey(keyName);
 });
 
 virtualKeys.forEach((el) =>
   el.addEventListener("click", (e) => {
+    if (gameOver) {
+      return;
+    }
     inputKey(e.target.textContent);
   })
 );
 
 const inputKey = (keyName) => {
-  changeLine(i);
   if (word.length === 5 && keyName === "ENTER") {
     if (!Object.values(wordsBase).includes(word)) {
       elLine.forEach((e) => e.classList.add("invalid-word"));
@@ -36,11 +42,18 @@ const inputKey = (keyName) => {
       letterChecker(elLine);
       console.log(word);
       if (word === dayWord) {
-        document.removeEventListener("keydown", () => {});
+        gameOver = true;
+      } else {
+        i++;
+        word = "";
       }
-      i++;
-      word = "";
     }
+  }
+  try {
+    elLine = Array.from(document.querySelector(`#tabl${i}`).children);
+  } catch {
+    document.removeEventListener("keydown", () => {});
+    return;
   }
   saveValues("tries", i);
   for (let i = 4; i >= 0; i--) {
@@ -52,17 +65,9 @@ const inputKey = (keyName) => {
       break;
     }
   }
-
   buildUserWord(elLine, keyName);
 };
 
-const changeLine = (i) => {
-  try {
-    elLine = Array.from(document.querySelector(`#tabl${i}`).children);
-  } catch {
-    return;
-  }
-};
 const buildUserWord = (line, key) => {
   for (let el of line) {
     if (!el.textContent && alphabet.includes(key)) {
@@ -149,6 +154,9 @@ const setValues = () => {
         letterChecker(line);
       } else {
         line.forEach((e) => e.classList.remove("invalid-word"));
+      }
+      if (setWord === dayWord) {
+        gameOver = true;
       }
       if (j === i) {
         return;
