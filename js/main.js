@@ -38,7 +38,7 @@ const inputKey = (keyName) => {
       elLine.forEach((e) => e.classList.add("invalid-word"));
     } else {
       tab = document.querySelector(".tabuleiro");
-      saveValues("tab-state", tab.outerHTML);
+
       letterChecker(elLine);
       console.log(word);
       if (word === dayWord) {
@@ -49,18 +49,19 @@ const inputKey = (keyName) => {
       }
     }
   }
+  saveValues("tab-state", tab.outerHTML);
   try {
     elLine = Array.from(document.querySelector(`#tabl${i}`).children);
   } catch {
     document.removeEventListener("keydown", () => {});
-    return;
+    gameOver = true;
   }
   saveValues("tries", i);
   for (let i = 4; i >= 0; i--) {
     if (["BACKSPACE", "DEL"].includes(keyName) && elLine[i].textContent != "") {
       removeKey(elLine[i]);
+      elLine.forEach((e) => e.classList.remove("invalid-word"));
       elLine[i].classList.remove("selected-item");
-      elLine[i].classList.remove("invalid-word");
       elLine[i].classList.add("item");
       break;
     }
