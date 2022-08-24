@@ -35,12 +35,11 @@ virtualKeys.forEach((el) =>
 const inputKey = (keyName) => {
   if (word.length === 5 && keyName === "ENTER") {
     if (!Object.values(wordsBase).includes(word)) {
+      Toast.show("Not verb in list.", "error");
       elLine.forEach((e) => e.classList.add("invalid-word"));
     } else {
       tab = document.querySelector(".tabuleiro");
-
       letterChecker(elLine);
-      console.log(word);
       if (word === dayWord) {
         gameOver = true;
       } else {
